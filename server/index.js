@@ -50,6 +50,12 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 1000,
+    server: {
+      socketOptions: {
+        socketTimeoutMS: 0,
+        connectTimeoutMS: 0
+      }
+    }
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
