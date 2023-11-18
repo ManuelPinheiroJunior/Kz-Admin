@@ -102,11 +102,9 @@ export const getGeography = async (req, res) => {
 export const postProduct = async (req, res) => {
   const product = req.body;
 
-  const newProduct = new Product(product);
-
+  
   try {
-    await newProduct.save();
-
+    const newProduct = await Product.create(product);
     res.status(201).json(newProduct);
   } catch (error) {
     res.status(409).json({ message: error.message });

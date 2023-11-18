@@ -2,7 +2,7 @@ import { Typography, Box, useTheme } from "@mui/material";
 import React from "react";
 import ButtonAdd from "./ButtonAdd";
 
-const Header = ({ title, subtitle, addButton, reportButton}) => {
+const Header = ({ title, subtitle, addButton, reportButton, tag}) => {
   const theme = useTheme();
   return (
     <>
@@ -22,7 +22,7 @@ const Header = ({ title, subtitle, addButton, reportButton}) => {
       </Typography>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-       <ButtonAdd addButton={addButton} reportButton={reportButton} />
+       <ButtonAdd addButton={addButton} reportButton={reportButton} tag={tag}/>
       </Box>
     </Box>
     </> 

@@ -4,9 +4,30 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '@emotion/react';
 import { DownloadOutlined } from '@mui/icons-material';
+import { usePostProductMutation } from 'state/api';
+
+const data = {
+  _id: "63701d24f03239c72c00018e",
+  name: "Port Beckley",
+  price: 311.71,
+  description: "AAAAAAAAAAA",
+  category: "clothing",
+  rating: 1.15,
+  supply: 1320,
+};
 
 export default function ButtonAdd({ addButton, reportButton }) {
     const theme = useTheme();
+    const [postProduct, { isLoading }] = usePostProductMutation();
+
+
+    const handleAdd = async (e) => {
+        e.preventDefault();
+       if(e.type === "click"){
+         await postProduct(data);
+       }
+    }
+
 
   return (
     <Stack spacing={2} direction="row">
@@ -16,7 +37,7 @@ export default function ButtonAdd({ addButton, reportButton }) {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px"
-      }}>to Add</Button> )}
+      }} onClick={(e) => handleAdd(e)}>to Add</Button> )}
      { reportButton && (
           <Button
             sx={{
