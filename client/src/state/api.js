@@ -11,13 +11,20 @@ export const api = createApi({
     "Geography",
     "Sales",
     "Admins",
-    "Performance",
     "Dashboard",
   ],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
       providesTags: ["User"],
+    }),
+    setLogin: build.mutation({
+      query: (data) => ({
+        url: "auth/login",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
     }),
     getProducts: build.query({
       query: () => "client/products",
@@ -68,6 +75,7 @@ export const api = createApi({
 
 export const {
   useGetUserQuery,
+  useSetLoginMutation,
   useGetProductsQuery,
   useGetCustomersQuery,
   useGetTransactionsQuery,

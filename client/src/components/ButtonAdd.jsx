@@ -7,10 +7,10 @@ import { DownloadOutlined } from '@mui/icons-material';
 import { usePostProductMutation } from 'state/api';
 
 const data = {
-  _id: "63701d24f03239c72c00018e",
+  _id: "63701d24f03239c72c00118e",
   name: "Port Beckley",
   price: 311.71,
-  description: "AAAAAAAAAAA",
+  description: "MyProduct",
   category: "clothing",
   rating: 1.15,
   supply: 1320,

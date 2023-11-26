@@ -9,11 +9,11 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
   HomeOutlined,
@@ -25,13 +25,11 @@ import {
   TodayOutlined,
   CalendarMonthOutlined,
   AdminPanelSettingsOutlined,
-  TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import profileImage from "assets/profile.jpeg";
 
 const navItems = [
   {
@@ -78,18 +76,14 @@ const navItems = [
     text: "Breakdown",
     icon: <PieChartOutlined />,
   },
-  {
-    text: "Management",
-    icon: null,
-  },
-  {
-    text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-  {
-    text: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
+  // {
+  //   text: "Management",
+  //   icon: null,
+  // },
+  // {
+  //   text: "Admin",
+  //   icon: <AdminPanelSettingsOutlined />,
+  // },
 ];
 
 const Sidebar = ({
@@ -100,6 +94,7 @@ const Sidebar = ({
   isNonMobile,
 }) => {
   const { pathname } = useLocation();
+  const imgUser = `http://localhost:5001/assets/${user.picturePath}`;
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
@@ -193,13 +188,13 @@ const Sidebar = ({
             </List>
           </Box>
 
-          <Box position="absolute" bottom="2rem">
+          <Box position="absolute" bottom="1rem">
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
               <Box
                 component="img"
                 alt="profile"
-                src={profileImage}
+                src={imgUser}
                 height="40px"
                 width="40px"
                 borderRadius="50%"
@@ -211,7 +206,7 @@ const Sidebar = ({
                   fontSize="0.9rem"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  {user.name}
+                  {`${user.firstName} ${user.lastName}`}
                 </Typography>
                 <Typography
                   fontSize="0.8rem"
@@ -220,12 +215,14 @@ const Sidebar = ({
                   {user.occupation}
                 </Typography>
               </Box>
-              <SettingsOutlined
+              <Tooltip title="Management">
+              <AdminPanelSettingsOutlined
                 sx={{
                   color: theme.palette.secondary[300],
                   fontSize: "25px ",
                 }}
               />
+              </Tooltip>
             </FlexBetween>
           </Box>
         </Drawer>

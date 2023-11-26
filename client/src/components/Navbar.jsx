@@ -9,8 +9,7 @@ import {
 } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
-import profileImage from "assets/profile.jpeg";
+import { setLogout, setMode } from "state";
 import {
   AppBar,
   Button,
@@ -28,10 +27,13 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
+  const imgUser = `http://localhost:5001/assets/${user.picturePath}`;
+
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleCloseMenu = () => setAnchorEl(null);
+  const handleClose = () => dispatch(setLogout());
 
   return (
     <AppBar
@@ -87,7 +89,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               <Box
                 component="img"
                 alt="profile"
-                src={profileImage}
+                src={imgUser}
                 height="32px"
                 width="32px"
                 borderRadius="50%"
@@ -99,7 +101,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  {user.name}
+                 {`${user.firstName} ${user.lastName}`}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
@@ -115,7 +117,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             <Menu
               anchorEl={anchorEl}
               open={isOpen}
-              onClose={handleClose}
+              onClose={handleCloseMenu}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
               <MenuItem onClick={handleClose}>Log Out</MenuItem>

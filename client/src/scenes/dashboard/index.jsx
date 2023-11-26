@@ -1,8 +1,6 @@
 import React from "react";
-import FlexBetween from "components/FlexBetween";
 import Header from "components/Header";
 import {
-  DownloadOutlined,
   Email,
   PointOfSale,
   PersonAdd,
@@ -10,7 +8,6 @@ import {
 } from "@mui/icons-material";
 import {
   Box,
-  Button,
   Typography,
   useTheme,
   useMediaQuery,
@@ -18,13 +15,18 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import BreakdownChart from "components/BreakdownChart";
 import OverviewChart from "components/OverviewChart";
-import { useGetDashboardQuery } from "state/api";
+import { useGetDashboardQuery, useGetUserQuery } from "state/api";
 import StatBox from "components/StatBox";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const { data, isLoading } = useGetDashboardQuery();
+  const userId = useSelector((state) => state.global.userId);
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const  dataUser  = useGetUserQuery(userId);
 
   const columns = [
     {
@@ -102,6 +104,7 @@ const Dashboard = () => {
           p="1rem"
           borderRadius="0.55rem"
         >
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100], textAlign: "center"  }}>{`Monthly sales total for the year ${currentYear}`} </Typography>
           <OverviewChart view="sales" isDashboard={true} />
         </Box>
         <StatBox
