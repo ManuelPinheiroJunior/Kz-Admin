@@ -190,7 +190,7 @@ const Form = () => {
                     {({ getRootProps, getInputProps }) => (
                       <Box
                         {...getRootProps()}
-                        border={`2px dashed ${palette.primary.main}`}
+                        border={`2px dashed ${palette.secondary.light}`}
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
@@ -241,9 +241,10 @@ const Form = () => {
               sx={{
                 m: "2rem 0",
                 p: "1rem",
-                backgroundColor: palette.primary.main,
                 color: palette.background.alt,
-                "&:hover": { color: palette.primary.main },
+                "&:hover": { color: palette.secondary.main },
+                backgroundColor: palette.secondary.light,
+                color: palette.background.alt,
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
@@ -255,7 +256,7 @@ const Form = () => {
               }}
               sx={{
                 textDecoration: "underline",
-                color: palette.primary.main,
+                color: palette.secondary.light,
                 "&:hover": {
                   cursor: "pointer",
                   color: palette.primary.light,

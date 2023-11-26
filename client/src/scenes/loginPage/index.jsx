@@ -11,9 +11,10 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
         textAlign="center"
+        sx={{backgroundColor: theme.palette.secondary.light,}}
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          Sociopedia
+          Kz ADMIN
         </Typography>
       </Box>
 
@@ -24,8 +25,8 @@ const LoginPage = () => {
         borderRadius="1.5rem"
         backgroundColor={theme.palette.background.alt}
       >
-        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome to Socipedia, the Social Media for Sociopaths!
+        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem", textAlign: "center" }}>
+          Welcome to Kz Admin, the online sales management system!
         </Typography>
         <Form />
       </Box>
