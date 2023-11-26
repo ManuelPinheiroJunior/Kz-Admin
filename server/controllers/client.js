@@ -104,7 +104,6 @@ export const postProduct = async (req, res) => {
   const product = req.body;
   try {
     const newProduct = await Product.create(product);
-    console.log("🚀 ~ file: client.js:106 ~ postProduct ~ newProduct:", newProduct)
     res.status(201).json(newProduct);
   } catch (error) {
     res.status(409).json({ message: error.message });
