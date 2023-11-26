@@ -259,7 +259,6 @@ const Form = () => {
                 color: palette.secondary.light,
                 "&:hover": {
                   cursor: "pointer",
-                  color: palette.primary.light,
                 },
               }}
             >

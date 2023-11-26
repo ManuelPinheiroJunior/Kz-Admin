@@ -13,8 +13,8 @@ const LoginPage = () => {
         textAlign="center"
         sx={{backgroundColor: theme.palette.secondary.light,}}
       >
-        <Typography fontWeight="bold" fontSize="32px" color="primary">
-          Kz ADMIN
+        <Typography fontWeight="bold" fontSize="32px" >
+          KZ ADMIN
         </Typography>
       </Box>
 
@@ -25,7 +25,7 @@ const LoginPage = () => {
         borderRadius="1.5rem"
         backgroundColor={theme.palette.background.alt}
       >
-        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem", textAlign: "center" }}>
+        <Typography fontWeight="600" variant="h5" sx={{ mb: "1.5rem", textAlign: "center" }}>
           Welcome to Kz Admin, the online sales management system!
         </Typography>
         <Form />

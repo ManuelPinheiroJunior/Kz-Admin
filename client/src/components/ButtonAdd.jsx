@@ -46,6 +46,11 @@ export default function ButtonAdd({ addButton, reportButton }) {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
+              "&:hover": {
+                cursor: "pointer",
+                color: theme.palette.secondary.main,
+              },
+
             }}
             startIcon={ <DownloadOutlined  />}
           >
