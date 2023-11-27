@@ -27,7 +27,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const imgUser = `http://localhost:5001/assets/${user.picturePath}`;
+  const imgUser = `${process.env.REACT_APP_BASE_URL}${user.picturePath}`;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);

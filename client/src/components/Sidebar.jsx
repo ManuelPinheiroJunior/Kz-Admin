@@ -90,7 +90,7 @@ const Sidebar = ({
   isNonMobile,
 }) => {
   const { pathname } = useLocation();
-  const imgUser = `http://localhost:5001/assets/${user.picturePath}`;
+  const imgUser = `${process.env.REACT_APP_BASE_URL}${user.picturePath}`;
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
