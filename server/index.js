@@ -58,21 +58,11 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 
 // Inicialize o GridFSBucket
-
-
-const storage = multer.memoryStorage(); // Armazenamento temporário em memória
-const upload = multer({ storage });
-
-/* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
-
-/* ROUTES */
-app.use("/auth", authRoutes);
-app.use("/client", clientRoutes);
-app.use("/general", generalRoutes);
-app.use("/management", managementRoutes);
-app.use("/sales", salesRoutes);
-app.use("/products", clientRoutes);
+conn.once("open", () => {
+  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "uploads", // Nome do bucket no GridFS
+  });
+});
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
@@ -96,5 +86,21 @@ mongoose
     mongoose.set('strictQuery', false);
 
     export const conn = mongoose.connection;
+
+const storage = multer.memoryStorage(); // Armazenamento temporário em memória
+const upload = multer({ storage });
+
+/* ROUTES WITH FILES */
+app.post("/auth/register", upload.single("picture"), register);
+
+/* ROUTES */
+app.use("/auth", authRoutes);
+app.use("/client", clientRoutes);
+app.use("/general", generalRoutes);
+app.use("/management", managementRoutes);
+app.use("/sales", salesRoutes);
+app.use("/products", clientRoutes);
+
+
 
   export default app;
