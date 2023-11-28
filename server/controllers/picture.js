@@ -4,7 +4,7 @@ export const create = async (req, res) => {
   try {
     const { name } = req.body;
 
-    const file = req.picture;
+    const { file } = req.picture;
     const picture = new Picture({
       name,
       src: file.path,
