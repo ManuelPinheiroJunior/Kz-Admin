@@ -1,9 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import multer from "multer";
 import helmet from "helmet";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.js";
@@ -13,24 +11,10 @@ import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 import path from "path";
 import { fileURLToPath } from "url";
-
-import User from "./models/User.js";
-import Product from "./models/Product.js";
-import ProductStat from "./models/ProductStat.js";
-import Transaction from "./models/Transaction.js";
-import OverallStat from "./models/OverallStat.js";
-import AffiliateStat from "./models/AffiliateStat.js";
-import {
-  dataUser,
-  dataProduct,
-  dataProductStat,
-  dataTransaction,
-  dataOverallStat,
-  dataAffiliateStat,
-} from "./data/index.js";
 import { register } from "./controllers/auth.js";
-
+require("./database.js");
 /* CONFIGURATION */
+const pictureRouter = require("./routes/picture");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
@@ -55,42 +39,8 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //});
 //const upload = multer({ storage });
 
-export let gfs;
-
-const conn = mongoose.connection;
-// Inicialize o GridFSBucket
-conn.once("open", () => {
-  gfs = new mongoose.mongo. GridFSBucket(conn.db, {
-    bucketName: "uploads",
-  });
-});
-
-/* MONGOOSE SETUP */
-const PORT = process.env.PORT || 9000;
-mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-  })
-  .then((error) => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-    /* ONLY ADD DATA ONE TIME */
-    // AffiliateStat.insertMany(dataAffiliateStat);
-    // OverallStat.insertMany(dataOverallStat);
-    // Product.insertMany(dataProduct);
-    // ProductStat.insertMany(dataProductStat);
-    // Transaction.insertMany(dataTransaction);
-    // User.insertMany(dataUser);
-  })
-  .catch((error) => console.log(`${error} did not connect`));
-    mongoose.set('strictQuery', false);
-
-
-const storage = multer.memoryStorage(); // Armazenamento temporário em memória
-const upload = multer({ storage });
-
 /* ROUTES WITH FILES */
+app.use("/pictures", pictureRouter);
 app.post("/auth/register", upload.single("picture"), register);
 
 /* ROUTES */
@@ -101,6 +51,8 @@ app.use("/management", managementRoutes);
 app.use("/sales", salesRoutes);
 app.use("/products", clientRoutes);
 
+const PORT = process.env.PORT || 9000;
 
+app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
-  export default app;
+export default app;
