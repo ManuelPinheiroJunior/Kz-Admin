@@ -10,6 +10,7 @@ export const create = async (req, res) => {
     });
 
     await picture.save();
+    
     res.json(picture);
     res.status(200).json({ message: "Imagem salva com sucesso" });
   } catch (err) {
