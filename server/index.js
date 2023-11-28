@@ -13,10 +13,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
 require("./database.js");
-/* CONFIGURATION */
 const pictureRouter = require("./routes/picture");
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+/* CONFIGURATION */
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+// app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
 //const storage = multer.diskStorage({
