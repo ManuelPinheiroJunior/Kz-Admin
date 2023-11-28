@@ -57,6 +57,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 
 
+export const conn = mongoose.connection;
 // Inicialize o GridFSBucket
 conn.once("open", () => {
   gfs = new mongoose.mongo.GridFSBucket(conn.db, {
@@ -85,7 +86,6 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
     mongoose.set('strictQuery', false);
 
-    export const conn = mongoose.connection;
 
 const storage = multer.memoryStorage(); // Armazenamento temporário em memória
 const upload = multer({ storage });
