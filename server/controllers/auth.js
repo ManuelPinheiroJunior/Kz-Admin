@@ -19,8 +19,8 @@ export const register = async (req, res) => {
 
     
     // Faça o upload do arquivo para o GridFS do MongoDB
-    const writeStream = gfs.openUploadStream(picture, {
-      contentType: picture.mimetype,
+    const writeStream = gfs.openUploadStream(picturePath, {
+      contentType: picture,
     });
 
     writeStream.write(picture.buffer);
