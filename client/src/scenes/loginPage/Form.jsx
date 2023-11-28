@@ -107,7 +107,7 @@ const Form = () => {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
+    formData.append("picture", values.picture);
 
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/pictures`,
@@ -231,7 +231,12 @@ const Form = () => {
                         p="1rem"
                         sx={{ "&:hover": { cursor: "pointer" } }}
                       >
-                        <input {...getInputProps()} />
+                        <input
+                          type="file"
+                          id="picture"
+                          name="picture"
+                          {...getInputProps()}
+                        />
                         {!values.picture ? (
                           <p>Add Picture Here</p>
                         ) : (

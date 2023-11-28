@@ -40,7 +40,7 @@ app.use(cors());
 
 /* ROUTES WITH FILES */
 app.use("/pictures", pictureRouter);
-app.post("/auth/register", upload.single("picture"), register);
+app.post("/auth/register", register);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
