@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { conn } from "../index.js";
+import { conn, gfs } from "../index.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -17,7 +17,7 @@ export const register = async (req, res) => {
       occupation,
     } = req.body;
 
-    let gfs;
+    
     // Faça o upload do arquivo para o GridFS do MongoDB
     const writeStream = gfs.openUploadStream(picture.originalname, {
       contentType: picture.mimetype,

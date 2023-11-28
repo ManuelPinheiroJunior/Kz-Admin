@@ -55,9 +55,9 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //});
 //const upload = multer({ storage });
 
+export let gfs;
 
-
-export const conn = mongoose.connection;
+const conn = mongoose.connection;
 // Inicialize o GridFSBucket
 conn.once("open", () => {
   gfs = new mongoose.mongo.GridFSBucket(conn.db, {
