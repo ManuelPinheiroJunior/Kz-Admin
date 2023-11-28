@@ -43,7 +43,6 @@ app.use(cors());
 
 /* ROUTES WITH FILES */
 app.use("/pictures", upload.single("file"), create);
-app.post("/auth/register", register);
 
 /* ROUTES */
 app.use("/auth", authRoutes);

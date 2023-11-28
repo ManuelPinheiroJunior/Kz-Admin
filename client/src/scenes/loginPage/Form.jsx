@@ -225,8 +225,8 @@ const Form = () => {
                       >
                         <input
                           type="file"
-                          id="picture"
-                          name="picture"
+                          id="file"
+                          name="file"
                           {...getInputProps()}
                         />
                         {!values.picture ? (
