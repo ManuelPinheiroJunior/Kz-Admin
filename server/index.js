@@ -13,6 +13,7 @@ import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { GridFsBucket } from "mongoose";
 
 import User from "./models/User.js";
 import Product from "./models/Product.js";
@@ -60,8 +61,9 @@ export let gfs;
 const conn = mongoose.connection;
 // Inicialize o GridFSBucket
 conn.once("open", () => {
-  var gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
+  gfs = new mongoose.mongo. GridFSBucket(conn.db, {
+    bucketName: "uploads",
+  });
 });
 
 /* MONGOOSE SETUP */
