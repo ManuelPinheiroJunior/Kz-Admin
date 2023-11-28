@@ -45,14 +45,27 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "public/assets"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+//const storage = multer.diskStorage({
+//  destination: function (req, file, cb) {
+//    cb(null, path.join(__dirname, "public/assets"));
+//  },
+//  filename: function (req, file, cb) {
+//    cb(null, file.originalname);
+//  },
+//});
+//const upload = multer({ storage });
+
+const conn = mongoose.connection;
+
+// Inicialize o GridFSBucket
+let gfs;
+conn.once("open", () => {
+  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "uploads", // Nome do bucket no GridFS
+  });
 });
+
+const storage = multer.memoryStorage(); // Armazenamento temporário em memória
 const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
