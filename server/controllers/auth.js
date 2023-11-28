@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import mongoose from "mongoose";
+import { conn } from "../index.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -19,7 +19,7 @@ export const register = async (req, res) => {
 
     let gfs;
 
-    const conn = mongoose.connection;
+ 
     conn.once("open", () => {
       gfs = new mongoose.mongo.GridFSBucket(conn.db, {
         bucketName: "uploads", // Nome do bucket no GridFS

@@ -95,4 +95,6 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
     mongoose.set('strictQuery', false);
 
+    export const conn = mongoose.connection;
+
   export default app;
