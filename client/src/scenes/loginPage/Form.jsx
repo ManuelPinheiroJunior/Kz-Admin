@@ -84,7 +84,7 @@ const Form = () => {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values.picture),
+        body: JSON.stringify(values),
       }
     );
     const loggedIn = await loggedInResponse.json();
@@ -122,11 +122,6 @@ const Form = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    console.log(
-      "🚀 ~ file: Form.jsx:128 ~ handleFormSubmit ~ onSubmitProps:",
-      onSubmitProps
-    );
-    console.log("🚀 ~ file: Form.jsx:128 ~ handleFormSubmit ~ values:", values);
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister)
       Promise.all(

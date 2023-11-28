@@ -3,7 +3,6 @@ import Picture from "../models/Picture.js";
 export const create = async (req, res) => {
   
   try {
-
     const file = req.file;
     const picture = new Picture({
       name: file.filename,
@@ -12,6 +11,7 @@ export const create = async (req, res) => {
 
     await picture.save();
     res.json(picture);
+    res.status(200).json({ message: "Imagem salva com sucesso" });
   } catch (err) {
     res.status(500).json({ message: err.message});
   }

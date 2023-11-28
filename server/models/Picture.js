@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
 
-const PictureSchema = new Schema({
+const PictureSchema = new mongoose.Schema({
   name: { type: String, required: true },
   src: { type: String, required: true },
 });
