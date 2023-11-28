@@ -16,6 +16,14 @@ export const register = async (req, res) => {
       occupation,
     } = req.body;
 
+    let gfs;
+
+    const conn = mongoose.connection;
+    conn.once("open", () => {
+      gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: "uploads", // Nome do bucket no GridFS
+      });
+    });
     // Faça o upload do arquivo para o GridFS do MongoDB
     const writeStream = gfs.openUploadStream(picture.originalname, {
       contentType: picture.mimetype,
