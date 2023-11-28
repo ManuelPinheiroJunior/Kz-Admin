@@ -13,7 +13,6 @@ import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import { GridFsBucket } from "mongoose";
 
 import User from "./models/User.js";
 import Product from "./models/Product.js";
