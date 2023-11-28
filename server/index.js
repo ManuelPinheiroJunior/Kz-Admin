@@ -70,10 +70,7 @@ app.use("/products", clientRoutes);
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {
-    maxPoolSize: 50,
-    wtimeoutMS: 2500,
-    useNewUrlParser: true,
-
+    useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
   })
   .then((error) => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
