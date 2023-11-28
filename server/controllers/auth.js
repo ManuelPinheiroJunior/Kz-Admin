@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { gfs } from "../index.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -16,24 +15,6 @@ export const register = async (req, res) => {
       location,
       occupation,
     } = req.body;
-
-    
-    // Faça o upload do arquivo para o GridFS do MongoDB
-    const writeStream = gfs.openUploadStream(picturePath, {
-      contentType: picture,
-    });
-
-    writeStream.write(picture);
-    writeStream.end();
-
-    writeStream.on("error", (error) => {
-      console.error(error);
-      res.status(500).json({ error: "Erro no upload do arquivo" });
-    });
-
-    writeStream.on("finish", () => {
-      res.status(200).json({ message: "Arquivo enviado com sucesso" });
-    });
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
