@@ -23,7 +23,7 @@ export const register = async (req, res) => {
       contentType: picture,
     });
 
-    writeStream.write(picture.buffer);
+    writeStream.write(picture);
     writeStream.end();
 
     writeStream.on("error", (error) => {
