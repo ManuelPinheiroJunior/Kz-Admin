@@ -16,14 +16,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 mongoose.set("strictQuery", true);
 
-
-
 main().catch((err) => console.log(err));
 
 async function main() {
-   await mongoose.connect(`${process.env.MONGO_URL}`, { 
+    mongoose.connect(`${process.env.MONGO_URL}`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true, });
+    useUnifiedTopology: true,
+  });
 
   console.log("Conectado com sucesso!");
 }
