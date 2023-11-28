@@ -9,12 +9,11 @@ import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
-import path from "path";
-import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
-const upload = require("../config/multer");
-require("./database.js");
-const pictureRouter = require("./routes/picture");
+import "./database.js";
+import "./config/multer.js";
+import pictureRouter from "./routes/picture.js";
+import upload from "./config/multer.js";
 /* CONFIGURATION */
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);

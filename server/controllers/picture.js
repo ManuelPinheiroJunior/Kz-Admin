@@ -1,7 +1,6 @@
-const fs = require("fs");
-const Picture = require("../models/Picture");
-
-exports.create = async (req, res) => {
+import fs from "fs";
+import Picture from "../models/Picture.js";
+export const create = async (req, res) => {
   try {
     const { name } = req.body;
 
@@ -18,7 +17,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+export const remove = async (req, res) => {
   try {
     const picture = await Picture.findById(req.params.id);
     if (!picture) {
@@ -32,7 +31,7 @@ exports.remove = async (req, res) => {
   }
 };
 
-exports.findAll = async (req, res) => {
+export const findAll = async (req, res) => {
   try {
     const pictures = await Picture.find();
     res.json(pictures);

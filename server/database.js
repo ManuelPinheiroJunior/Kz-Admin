@@ -12,14 +12,11 @@ import {
   dataOverallStat,
   dataAffiliateStat,
 } from "./data/index.js";
-
-const mongoose = require("mongoose");
-
-require("dotenv").config();
-
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 mongoose.set("strictQuery", true);
 
-main().catch((err) => console.log(err));
+main().catch((err) => console.log());
 
 async function main() {
   await mongoose.connect(`${process.env.MONGO_URL}`);
@@ -27,13 +24,12 @@ async function main() {
   console.log("Conectado com sucesso!");
 }
 
-module.exports = main;
+export default main;
 
-
-    /* ONLY ADD DATA ONE TIME */
-    // AffiliateStat.insertMany(dataAffiliateStat);
-    // OverallStat.insertMany(dataOverallStat);
-    // Product.insertMany(dataProduct);
-    // ProductStat.insertMany(dataProductStat);
-    // Transaction.insertMany(dataTransaction);
-    // User.insertMany(dataUser);
+/* ONLY ADD DATA ONE TIME */
+// AffiliateStat.insertMany(dataAffiliateStat);
+// OverallStat.insertMany(dataOverallStat);
+// Product.insertMany(dataProduct);
+// ProductStat.insertMany(dataProductStat);
+// Transaction.insertMany(dataTransaction);
+// User.insertMany(dataUser);
