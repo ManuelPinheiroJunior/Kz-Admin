@@ -60,9 +60,8 @@ export let gfs;
 const conn = mongoose.connection;
 // Inicialize o GridFSBucket
 conn.once("open", () => {
-  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-    bucketName: "uploads", // Nome do bucket no GridFS
-  });
+  Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
 });
 
 /* MONGOOSE SETUP */
