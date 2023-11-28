@@ -16,10 +16,19 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 mongoose.set("strictQuery", true);
 
+const options = { 
+  // Definir um tempo limite maior para as operações
+  socketTimeoutMS: 30000, // Tempo limite da conexão em milissegundos
+  connectTimeoutMS: 30000, // Tempo limite de conexão em milissegundos
+};
+
 main().catch((err) => console.log());
 
 async function main() {
-  await mongoose.connect(`${process.env.MONGO_URL}`);
+   await mongoose.connect(`${process.env.MONGO_URL}`, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true, 
+    ...options,});
 
   console.log("Conectado com sucesso!");
 }

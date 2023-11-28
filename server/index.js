@@ -13,7 +13,9 @@ import { register } from "./controllers/auth.js";
 import "./database.js";
 import "./config/multer.js";
 import pictureRouter from "./routes/picture.js";
+import path from "path";
 import upload from "./config/multer.js";
+import { create } from "./controllers/picture.js";
 /* CONFIGURATION */
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -26,6 +28,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+
 // app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
@@ -39,7 +42,7 @@ app.use(cors());
 //});
 
 /* ROUTES WITH FILES */
-app.use("/pictures", pictureRouter);
+app.use("/pictures", upload.single("file"), create);
 app.post("/auth/register", register);
 
 /* ROUTES */

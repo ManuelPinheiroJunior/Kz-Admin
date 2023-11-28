@@ -1,20 +1,19 @@
 import fs from "fs";
 import Picture from "../models/Picture.js";
 export const create = async (req, res) => {
+  
   try {
-    const { name } = req.body;
 
-    const file = req.body.picture;
-    console.log("🚀 ~ file: picture.js:8 ~ create ~ file:", file);
+    const file = req.file;
     const picture = new Picture({
-      name,
+      name: file.filename,
       src: file.path,
     });
 
     await picture.save();
     res.json(picture);
   } catch (err) {
-    res.status(500).json({ message: "Erro ao salvar a imagem." });
+    res.status(500).json({ message: err.message});
   }
 };
 
@@ -28,7 +27,7 @@ export const remove = async (req, res) => {
     await picture.remove();
     res.json({ message: "Imagem removida com sucesso" });
   } catch (err) {
-    res.status(500).json({ message: "Erro ao remover a imagem" });
+    res.status(500).json({ message: err.message });
   }
 };
 

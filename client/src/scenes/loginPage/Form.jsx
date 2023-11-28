@@ -104,10 +104,7 @@ const Form = () => {
   const upload = async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append("picture", values.picture);
+    formData.append("file", values.picture);
 
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/pictures`,
