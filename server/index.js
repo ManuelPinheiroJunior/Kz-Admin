@@ -47,7 +47,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/assets");
+    cb(null, path.join(__dirname, "public/assets"));
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -70,7 +70,7 @@ app.use("/products", clientRoutes);
 const PORT = process.env.PORT || 9000;
 mongoose
   .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
+    useNewUrlParser: true, 
     useUnifiedTopology: true,
   })
   .then((error) => {
