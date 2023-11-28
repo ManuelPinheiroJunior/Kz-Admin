@@ -12,6 +12,7 @@ import salesRoutes from "./routes/sales.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
+const upload = require("../config/multer");
 require("./database.js");
 const pictureRouter = require("./routes/picture");
 /* CONFIGURATION */
@@ -37,7 +38,6 @@ app.use(cors());
 //    cb(null, file.originalname);
 //  },
 //});
-//const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.use("/pictures", pictureRouter);
