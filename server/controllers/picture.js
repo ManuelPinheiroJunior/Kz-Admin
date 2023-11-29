@@ -34,7 +34,9 @@ export const remove = async (req, res) => {
 
 export const findAll = async (req, res) => {
   try {
+    console.log("entrou")
     const pictures = await Picture.find();
+    console.log("🚀 ~ file: picture.js:39 ~ findAll ~ pictures:", pictures)
     res.json(pictures);
   } catch (err) {
     res.status(500).json({ message: "Erro ao buscar as imagens." });

@@ -10,6 +10,7 @@ import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
+import pictureRoutes from "./routes/picture.js";
 import "./config/multer.js";
 import pictureRouter from "./routes/picture.js";
 import path from "path";
@@ -41,7 +42,7 @@ app.use(cors());
 //});
 
 /* ROUTES WITH FILES */
-app.use("/pictures", upload.single("file"), create);
+app.use("/pictures", pictureRoutes);
 
 /* ROUTES */
 app.use("/auth", authRoutes);

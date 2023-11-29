@@ -29,6 +29,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
   const imgUser = `${process.env.REACT_APP_BASE_URL}${user.picturePath}`;
 
+  console.log("🚀 ~ file: Navbar.jsx:32 ~ Navbar ~ imgUser:", imgUser)
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);

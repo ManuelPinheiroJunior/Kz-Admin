@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -55,19 +55,33 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
+  const findAllImages = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/pictures/all`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
+
+
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append("picturePath", values.picture.name);
+    const prepareData = {
+      ...values,
+      picturePath: values.picture.path,
+    };
 
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/auth/register`,
       {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(prepareData),
       }
     );
     const savedUser = await savedUserResponse.json();
@@ -122,15 +136,13 @@ const Form = () => {
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
+
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister)
-      Promise.all(
-        [register(values, onSubmitProps)],
-        [upload(values, onSubmitProps)]
-      ).then(() => {
-        console.log(values);
-      });
+        register(values, onSubmitProps) && 
+        upload(values, onSubmitProps)
   };
+
 
   return (
     <Formik
