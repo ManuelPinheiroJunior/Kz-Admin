@@ -15,6 +15,8 @@ export const register = async (req, res) => {
       occupation,
     } = req.body;
 
+    User.createIndexes();
+
     const saltRounds = 10; // 10 is default
 
     const salt = await bcrypt.genSalt(saltRounds);
