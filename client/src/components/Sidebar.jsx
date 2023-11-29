@@ -30,6 +30,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
+import { useSelector } from "react-redux";
 
 const navItems = [
   {
@@ -90,7 +91,6 @@ const Sidebar = ({
   isNonMobile,
 }) => {
   const { pathname } = useLocation();
-  const imgUser = `${process.env.REACT_APP_BASE_URL}${user.picturePath}`;
   const [active, setActive] = useState("");
   const navigate = useNavigate();
   const theme = useTheme();
@@ -190,7 +190,7 @@ const Sidebar = ({
               <Box
                 component="img"
                 alt="profile"
-                src={imgUser}
+                src={user.picturePath}
                 height="40px"
                 width="40px"
                 borderRadius="50%"

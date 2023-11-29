@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -55,33 +55,15 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const findAllImages = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/pictures/all`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-
-
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
-    const prepareData = {
-      ...values,
-      picturePath: values.picture.path,
-    };
-
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/auth/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(prepareData),
+        body: JSON.stringify(values),
       }
     );
     const savedUser = await savedUserResponse.json();
@@ -115,10 +97,10 @@ const Form = () => {
     }
   };
 
-  const upload = async (values, onSubmitProps) => {
+  const handleBlurUpload = async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
-    formData.append("file", values.picture);
+    formData.append("file", values);
 
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/pictures`,
@@ -128,6 +110,7 @@ const Form = () => {
       }
     );
     const savedUser = await savedUserResponse.json();
+    onSubmitProps("picturePath", savedUser.img);
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -139,8 +122,7 @@ const Form = () => {
 
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister)
-        register(values, onSubmitProps) && 
-        upload(values, onSubmitProps)
+        register(values, onSubmitProps)
   };
 
 
@@ -225,8 +207,9 @@ const Form = () => {
                     acceptedFiles=".jpg,.jpeg,.png"
                     multiple={false}
                     onDrop={(acceptedFiles) =>
-                      setFieldValue("picture", acceptedFiles[0])
+                      setFieldValue("picture", acceptedFiles[0]) && handleBlurUpload(acceptedFiles[0],setFieldValue)
                     }
+
                   >
                     {({ getRootProps, getInputProps }) => (
                       <Box
