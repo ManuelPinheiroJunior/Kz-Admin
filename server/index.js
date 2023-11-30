@@ -13,7 +13,6 @@ import salesRoutes from "./routes/sales.js";
 import pictureRoutes from "./routes/picture.js";
 import "./config/multer.js";
 
-
 /* CONFIGURATION */
 dotenv.config();
 const app = express();
