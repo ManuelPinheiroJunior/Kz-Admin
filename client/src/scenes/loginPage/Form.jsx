@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -48,6 +49,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [picture, setPicture] = useState(null);	
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -111,6 +113,7 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps("picturePath", savedUser.img);
+    setPicture(savedUser.img);
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -229,7 +232,10 @@ const Form = () => {
                         ) : (
                           <FlexBetween>
                             <Typography>{values.picture.name}</Typography>
+                            <FlexBetween>
+                            { picture && ( <CheckCircleIcon sx={{ color: "#4caf50" }} /> )}
                             <EditOutlinedIcon />
+                            </FlexBetween>
                           </FlexBetween>
                         )}
                       </Box>
